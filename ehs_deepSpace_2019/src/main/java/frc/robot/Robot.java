@@ -30,7 +30,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 
-  private static Solenoid solenoidPort = new Solenoid(0);
+  private static Solenoid solenoidPort = new Solenoid(3);
   private PneumaticsClaw claw = new PneumaticsClaw(solenoidPort);
   private RackandPinion rack = new RackandPinion(new PWMVictorSPX(2));
 
