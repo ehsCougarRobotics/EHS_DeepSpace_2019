@@ -30,9 +30,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 
-  private static Solenoid solenoidPort = new Solenoid(3);
-  private PneumaticsClaw claw = new PneumaticsClaw(solenoidPort);
+  private static Solenoid solenoidPortOpen = new Solenoid(3);
+  private static Solenoid solenoidPortClose = new Solenoid(4);
+  private PneumaticsClaw claw = new PneumaticsClaw(solenoidPortOpen, solenoidPortClose);
   private RackandPinion rack = new RackandPinion(new PWMVictorSPX(2));
+
 
   
 
@@ -88,17 +90,30 @@ public class Robot extends TimedRobot {
     m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
 
 
-    // Open and Closes Pnuematic Claw
+    // Opens Pnuematic Claw
  if (m_stick.getRawButton(2)) {
   SmartDashboard.putString("btn", "2");
-  if (this.claw.getValue()) {
-    this.claw.closeClaw(); 
-        SmartDashboard.putString("claw", "closed");
-  } else {
-    this.claw.openClaw();
-    SmartDashboard.putString("claw", "open");
-  } 
+  // open claw
+  this.claw.openClaw();
+ 
+ } else {
+   // close claw
+   this.claw.closeClaw();
  }
+
+
+    // Closes Pnuematic Claw
+    if (m_stick.getRawButton(2)) {
+      SmartDashboard.putString("btn", "2");
+      // open claw
+      this.claw.closeClaw();
+     
+     } 
+     
+
+
+
+
 
 // Retract Rack n Pinion
  if (m_stick.getRawButton(7)) {
