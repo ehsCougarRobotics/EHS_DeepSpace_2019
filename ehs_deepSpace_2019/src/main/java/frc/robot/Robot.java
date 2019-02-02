@@ -103,7 +103,7 @@ public class Robot extends TimedRobot {
 
 
     // Closes Pnuematic Claw
-    if (m_stick.getRawButton(3)) {
+    if (m_stick.getRawButton(2)) {
       SmartDashboard.putString("btn", "2");
       // open claw
       this.claw.closeClaw();
