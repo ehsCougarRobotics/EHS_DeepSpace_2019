@@ -7,17 +7,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class PneumaticsClaw {
     
-    private Solenoid portOpen;
-    private Solenoid portClose;
+    private Solenoid claw;
    
     /**
      * Controls the Solenoid to open or close the claw
      * @param pneumaticsPort
      */
-    public PneumaticsClaw (Solenoid solenoidPortOpen, Solenoid solenoidPortClose){
+    public PneumaticsClaw (Solenoid doubleSolenoid){
         
-        this.portOpen = solenoidPortOpen;
-        this.portClose = solenoidPortClose;
+        this.claw = doubleSolenoid;
     }
     
     /**
@@ -25,8 +23,8 @@ public class PneumaticsClaw {
      */
     public void openClaw() {
         SmartDashboard.putString("claw", "opening");
-
-        this.portOpen.set(true);
+/* changed from portOpen to claw*/ 
+        this.claw.set(true);
     }
     
     /**
@@ -34,24 +32,8 @@ public class PneumaticsClaw {
      */
     public void closeClaw() {
         SmartDashboard.putString("claw", "closing");
+/* Changed from portClose to claw*/
+        this.claw.set(false);
 
-        this.portClose.set(false);
-
-    }
-
-    /**
-     * Returns wether claw is open 
-     * @return
-     */
-    public boolean getOpenValue() {
-        return this.portOpen.get();
-    }
-
-    /**
-     * Returns wether claw is closed
-     * @return
-     */
-    public boolean getCloseValue() {
-        return this.portClose.get();
     }
 }
