@@ -10,12 +10,12 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.classes.PneumaticsClaw;
 import frc.robot.classes.RackandPinion;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
 // Work on class implementation for future games
@@ -29,11 +29,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends TimedRobot {
-
-  private static Solenoid solenoidPortOpen = new Solenoid(3);
-  private static Solenoid solenoidPortClose = new Solenoid(4);
-  private PneumaticsClaw claw = new PneumaticsClaw(solenoidPortOpen, solenoidPortClose);
+  
+  public static DoubleSolenoid doubleSolenoidId = new DoubleSolenoid(3, 4);
+  private PneumaticsClaw claw = new PneumaticsClaw(doubleSolenoidId);
   private RackandPinion rack = new RackandPinion(new PWMVictorSPX(2));
+    
+  
 
 
   
@@ -103,8 +104,8 @@ public class Robot extends TimedRobot {
 
 
     // Closes Pnuematic Claw
-    if (m_stick.getRawButton(2)) {
-      SmartDashboard.putString("btn", "2");
+    if (m_stick.getRawButton(3)) {
+      SmartDashboard.putString("btn", "3");
       // open claw
       this.claw.closeClaw();
      
