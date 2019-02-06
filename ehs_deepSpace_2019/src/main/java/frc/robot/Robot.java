@@ -10,13 +10,13 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.classes.PneumaticsClaw;
 import frc.robot.classes.RackandPinion;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-
 
 // Work on class implementation for future games
 // import frc.robot.classes.RobotCameraSever;
@@ -30,9 +30,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
  */
 public class Robot extends TimedRobot {
   
-  public static DoubleSolenoid doubleSolenoidId = new DoubleSolenoid(3, 4);
+  public static DoubleSolenoid doubleSolenoidId = new DoubleSolenoid(3, 4); 
   private PneumaticsClaw claw = new PneumaticsClaw(doubleSolenoidId);
-  private RackandPinion rack = new RackandPinion(new PWMVictorSPX(2));
+  private RackandPinion rack = new RackandPinion(new Spark(2));
     
   
 
@@ -122,7 +122,9 @@ public class Robot extends TimedRobot {
   do {
     this.rack.retract(0.5); 
   } while (m_stick.getRawButton(7));
- }   
+ } else { 
+   this.rack.stopRackAndPinion();
+ }
 
  
 // Extend Rack n Pinion
@@ -131,6 +133,8 @@ if (m_stick.getRawButton(8)) {
 do {
    this.rack.extend(0.5);
  } while (m_stick.getRawButton(8));
+} else {
+  this.rack.stopRackAndPinion();
 }
 
 }

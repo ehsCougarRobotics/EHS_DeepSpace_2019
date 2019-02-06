@@ -1,6 +1,6 @@
 package frc.robot.classes;
 
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class RackandPinion {
 
-    private SpeedController rackMotorController;
+    private Spark rackMotorController;
     private final Timer m_timer = new Timer();
 
-    public RackandPinion(SpeedController rackpSpeedController) {
+    public RackandPinion(Spark rackpSpeedController) {
         this.rackMotorController = rackpSpeedController;
         
     }
