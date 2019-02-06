@@ -26,7 +26,7 @@ public class RackandPinion {
         m_timer.start(); // Start Timer
 
         if (m_timer.get() < seconds) {
-            this.rackMotorController.set(0.5);
+            this.rackMotorController.set(0.1);
         } else {
             this.rackMotorController.stopMotor();
             SmartDashboard.putString("function", "sandstormInit Ends");

@@ -62,7 +62,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-  this.rack.sandstormInit(8);
+  this.rack.sandstormInit(1);
 
 
   }
@@ -96,11 +96,7 @@ public class Robot extends TimedRobot {
   SmartDashboard.putString("btn", "2");
   // open claw
   this.claw.openClaw();
- 
- } else {
-   // close claw
-   this.claw.closeClaw();
- }
+ } 
 
 
     // Closes Pnuematic Claw
@@ -108,19 +104,14 @@ public class Robot extends TimedRobot {
       SmartDashboard.putString("btn", "3");
       // open claw
       this.claw.closeClaw();
-     
      } 
      
-
-
-
-
 
 // Retract Rack n Pinion
  if (m_stick.getRawButton(7)) {
    SmartDashboard.putString("btn", "7");
   do {
-    this.rack.retract(0.5); 
+    this.rack.retract(-0.1); 
   } while (m_stick.getRawButton(7));
  } else { 
    this.rack.stopRackAndPinion();
@@ -131,7 +122,7 @@ public class Robot extends TimedRobot {
 if (m_stick.getRawButton(8)) {
   SmartDashboard.putString("btn", "8");
 do {
-   this.rack.extend(0.5);
+   this.rack.extend(0.1);
  } while (m_stick.getRawButton(8));
 } else {
   this.rack.stopRackAndPinion();
