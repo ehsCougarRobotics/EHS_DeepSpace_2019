@@ -111,7 +111,7 @@ public class Robot extends TimedRobot {
  if (m_stick.getRawButton(7)) {
    SmartDashboard.putString("btn", "7");
   do {
-    this.rack.retract(-0.1); 
+    this.rack.retract(-0.3); 
   } while (m_stick.getRawButton(7));
  } else { 
    this.rack.stopRackAndPinion();
@@ -122,7 +122,7 @@ public class Robot extends TimedRobot {
 if (m_stick.getRawButton(8)) {
   SmartDashboard.putString("btn", "8");
 do {
-   this.rack.extend(0.1);
+   this.rack.extend(0.3);
  } while (m_stick.getRawButton(8));
 } else {
   this.rack.stopRackAndPinion();
