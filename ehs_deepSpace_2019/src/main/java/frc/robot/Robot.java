@@ -107,25 +107,23 @@ public class Robot extends TimedRobot {
      } 
      
 
-// Retract Rack n Pinion
+// Extend Rack and Pinion
  if (m_stick.getRawButton(7)) {
-   SmartDashboard.putString("btn", "7");
-  do {
-    this.rack.retract(-0.3); 
-  } while (m_stick.getRawButton(7));
- } else { 
-   this.rack.stopRackAndPinion();
+   if (this.rack.isMovingForward()){
+     this.rack.stopRackAndPinion();
+   } else {
+     this.rack.extend(0.3);
+   }
  }
 
  
 // Extend Rack n Pinion
 if (m_stick.getRawButton(8)) {
-  SmartDashboard.putString("btn", "8");
-do {
-   this.rack.extend(0.3);
- } while (m_stick.getRawButton(8));
-} else {
-  this.rack.stopRackAndPinion();
+ if (this.rack.isMovingForward() == false) {
+   this.rack.stopRackAndPinion();
+ } else {
+   this.rack.retract(0.3);
+ }
 }
 
 }

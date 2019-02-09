@@ -61,4 +61,7 @@ public class RackandPinion {
         this.rackMotorController.stopMotor();
         
     }
+    public boolean isMovingForward() {
+        return this.rackMotorController.getSpeed() > 0;
+    } 
 }
