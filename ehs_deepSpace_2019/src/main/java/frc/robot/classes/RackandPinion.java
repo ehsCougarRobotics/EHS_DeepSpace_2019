@@ -61,6 +61,11 @@ public class RackandPinion {
         this.rackMotorController.stopMotor();
         
     }
+
+    /**
+     * Returns if motor is running forward (positive)
+     * @return
+     */
     public boolean isMovingForward() {
         return this.rackMotorController.getSpeed() > 0;
     } 

@@ -109,24 +109,22 @@ public class Robot extends TimedRobot {
 
 // Extend Rack and Pinion
  if (m_stick.getRawButton(7)) {
-   if (this.rack.isMovingForward()){
-     this.rack.stopRackAndPinion();
-   } else {
-     this.rack.extend(0.3);
-   }
+   this.rack.extend(0.3);
  }
 
  
 // Extend Rack n Pinion
 if (m_stick.getRawButton(8)) {
- if (this.rack.isMovingForward() == false) {
-   this.rack.stopRackAndPinion();
- } else {
-   this.rack.retract(0.3);
- }
+ this.rack.retract(0.3);
+}
+
+// Stop Rack n pinion
+if (m_stick.getRawButton(9)){
+  this.rack.stopRackAndPinion();
 }
 
 }
+
 
 
 
