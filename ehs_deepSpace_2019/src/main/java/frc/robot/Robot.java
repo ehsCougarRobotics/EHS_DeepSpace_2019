@@ -113,9 +113,9 @@ public class Robot extends TimedRobot {
  }
 
  
-// Extend Rack n Pinion
+// Retract Rack n Pinion
 if (m_stick.getRawButton(8)) {
- this.rack.retract(0.3);
+ this.rack.retract(-0.3);
 }
 
 // Stop Rack n pinion
