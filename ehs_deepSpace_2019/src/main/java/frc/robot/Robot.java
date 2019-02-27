@@ -17,6 +17,7 @@ import frc.robot.classes.PneumaticsClaw;
 import frc.robot.classes.RackandPinion;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 // Work on class implementation for future games
 // import frc.robot.classes.RobotCameraSever;
@@ -33,6 +34,9 @@ public class Robot extends TimedRobot {
   public static DoubleSolenoid doubleSolenoidId = new DoubleSolenoid(3, 4); 
   private PneumaticsClaw claw = new PneumaticsClaw(doubleSolenoidId);
   private RackandPinion rack = new RackandPinion(new Spark(2));
+
+  private DigitalInput limitSwitchFront = new DigitalInput(0);
+  private DigitalInput limitSwitchBack = new DigitalInput(1);
     
   
 
@@ -112,11 +116,21 @@ public class Robot extends TimedRobot {
    this.rack.extend(0.5);
  }
 
+// Limit Switch Hard Stop Front
+while (limitSwitchFront.get()) {  
+  this.rack.stopRackAndPinion();
+}
  
 // Retract Rack n Pinion
 if (m_stick.getRawButton(8)) {
  this.rack.retract(-0.5);
 }
+
+//Limit Switch Hard Stop Back
+while (limitSwitchBack.get()) {
+  this.rack.stopRackAndPinion();
+}
+
 
 // Stop Rack n pinion
 if (m_stick.getRawButton(9)){
