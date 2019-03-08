@@ -30,31 +30,27 @@ import edu.wpi.first.wpilibj.DigitalInput;
  * directory.
  */
 public class Robot extends TimedRobot {
-  
-  public static DoubleSolenoid doubleSolenoidId = new DoubleSolenoid(3, 4); 
+
+  // Pnumatic Double Solenoid
+  public static DoubleSolenoid doubleSolenoidId = new DoubleSolenoid(3, 4);
+
+  // Custom Classes
   private PneumaticsClaw claw = new PneumaticsClaw(doubleSolenoidId);
   private RackandPinion rack = new RackandPinion(new Spark(2));
 
+  // Limit Switch Variables
   private DigitalInput limitSwitchFront = new DigitalInput(0);
   private DigitalInput limitSwitchBack = new DigitalInput(1);
-    
-  
 
+  // Drive System
+  private final DifferentialDrive m_robotDrive = new DifferentialDrive(new PWMVictorSPX(0), new PWMVictorSPX(1));
 
-  
-
-
-
-  private final DifferentialDrive m_robotDrive
-      = new DifferentialDrive(new PWMVictorSPX(0), new PWMVictorSPX(1));
+  // Controller
   private final Joystick m_stick = new Joystick(0);
 
-
-
-
   /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+   * This function is run when the robot is first started up and should be used
+   * for any initialization code.
    */
   @Override
   public void robotInit() {
@@ -66,9 +62,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-  this.rack.sandstormInit(1);
-
-
   }
 
   /**
@@ -76,8 +69,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-
-    // m_stick.getRawButtonReleased(button)
   }
 
   /**
@@ -94,53 +85,62 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     m_robotDrive.arcadeDrive(-m_stick.getY(), m_stick.getX());
 
+    ////////////// CLAW BUTTONS /////////////////
+    /**
+     * Open Claw - 2 Close Claw - 3
+     */
 
     // Opens Pnuematic Claw
- if (m_stick.getRawButton(2)) {
-  SmartDashboard.putString("btn", "2");
-  // open claw
-  this.claw.openClaw();
- } 
-
+    if (m_stick.getRawButton(2)) {
+      SmartDashboard.putString("btn", "2");
+      // open claw
+      this.claw.openClaw();
+    }
 
     // Closes Pnuematic Claw
     if (m_stick.getRawButton(3)) {
       SmartDashboard.putString("btn", "3");
       // open claw
       this.claw.closeClaw();
-     } 
-     
+    }
 
-// Extend Rack and Pinion
- if (m_stick.getRawButton(7)) {
-   this.rack.extend(0.5);
- }
+    ////////////// RACK AND PINION BUTTONS /////////////////
+    /**
+     * Extend Claw - 7 Retract Claw - 8 Stop Claw - 9 Current Foward Speed 50%
+     * Current Reverse Speed 50%
+     */
 
-// Limit Switch Hard Stop Front
-while (limitSwitchFront.get()) {  
-  this.rack.stopRackAndPinion();
-}
- 
-// Retract Rack n Pinion
-if (m_stick.getRawButton(8)) {
- this.rack.retract(-0.5);
-}
+    // Extend Rack and Pinion
+    if (m_stick.getRawButton(7)) {
+      this.rack.extend(0.5);
+    }
 
-//Limit Switch Hard Stop Back
-while (limitSwitchBack.get()) {
-  this.rack.stopRackAndPinion();
-}
+    // Retract Rack n Pinion
+    if (m_stick.getRawButton(8)) {
+      this.rack.retract(-0.5);
+    }
 
+    // Stop Rack n pinion
+    if (m_stick.getRawButton(9)) {
+      this.rack.stopRackAndPinion();
+    }
 
-// Stop Rack n pinion
-if (m_stick.getRawButton(9)){
-  this.rack.stopRackAndPinion();
-}
+    ////////////// LIMIT SWITCHES /////////////////
+    /**
+     * Front limit switch DIO Port - 0 Back limit switch DIO Port - 1
+     */
 
-}
+    // Limit Switch Hard Stop Front
+    if (limitSwitchFront.get()) {
+      this.rack.stopRackAndPinion();
+    }
 
+    // Limit Switch Hard Stop Back
+    if (limitSwitchBack.get()) {
+      this.rack.stopRackAndPinion();
+    }
 
-
+  }
 
   /**
    * This function is called periodically during test mode.
